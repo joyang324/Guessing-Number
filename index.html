@@ -86,14 +86,27 @@
         message.textContent = `恭喜你，你猜對了！你這次猜了 ${attempts} 次哦～`;
         message.style.color = "green";
         guessSubmit.disabled = true;
-      } else if (userGuess < targetNumber) {
+      } else if(attempts === maxAttempts){
+        message.textContent = `You Failed! Answer is ${targetNumber}`;
+        message.style.color = "red";
+        guessSubmit.disabled = true;
+        revealAnswerBtn.disabled = true;
+        playAgainBtn.disabled = true;
+        // Set a timeout
+      setTimeout(() =>{
+        playAgain();
+        revealAnswerBtn.disabled = false;
+        playAgainBtn.disabled = false;
+      },5000)
+
+      }else if (userGuess < targetNumber) {
         message.textContent = "太小了，再試一次。";
         lowerbound.textContent = userGuess; // Adjust the lowerbound
         message.style.color = "red";
       } else {
         message.textContent = "太大了，再試一次。";
-        message.style.color = "red";
         upperbound.textContent = userGuess; // Adjust the upperbound
+        message.style.color = "red";
       }
 
       if (userGuess === targetNumber) {
