@@ -16,7 +16,7 @@
     <input type="submit" value="猜!" id="guessSubmit" />
     <p class="message"></p>
     <button id="playAgainBtn">再玩一次</button>
-
+    <button id="revealAnswerBtn">答案揭曉</button>
   </body>
   <script>
     // Random number
@@ -38,8 +38,10 @@
 
     // Event listener
     guessSubmit.addEventListener("click", checkGuess);
+    //revealAnswer button
     revealAnswerBtn.addEventListener("click", revealAnswer);
-    playAgainBtn.addEventListener("click", playAgain); //play again button
+    //play again button
+    playAgainBtn.addEventListener("click", playAgain); 
     
     //PlayAgain Function
     function generateRandomNumber() {
@@ -56,6 +58,11 @@
       // Reset attempts
       attempts = 0;
       
+      // Check if the reveal answer button was disabled and re-enable it
+      if (revealAnswerBtn.disabled) {
+        revealAnswerBtn.disabled = false;
+      }
+
       // Generate a new random number for the next round
       targetNumber = generateRandomNumber();
       console.log("New answer: " + targetNumber);
@@ -63,7 +70,8 @@
       // Clear the guess field
       guessField.value = "";
       guessField.focus();
-      
+     
+      //Re-enable
       guessSubmit.disabled = false;
     }
 
