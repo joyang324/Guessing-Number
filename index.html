@@ -29,13 +29,43 @@
     const message = document.querySelector(".message");
     const lowerbound = document.querySelector(".lowerbound");
     const upperbound = document.querySelector(".upperbound");
+    const revealAnswerBtn = document.getElementById("revealAnswerBtn");
+    const playAgainBtn = document.getElementById("playAgainBtn"); //play again button
 
-    // Initialize attempts
+    // Initialize attempts and maxAttempts
     let attempts = 0;
     const maxAttempts = 5;
 
     // Event listener
     guessSubmit.addEventListener("click", checkGuess);
+    revealAnswerBtn.addEventListener("click", revealAnswer);
+    playAgainBtn.addEventListener("click", playAgain); //play again button
+    
+    //PlayAgain Function
+    function generateRandomNumber() {
+      return Math.floor(Math.random() * 100) + 1;
+    }
+    function playAgain() {
+      // Hide the previous answer if revealed
+      message.textContent = ""; 
+      
+      // Reset the lower and upper bounds
+      lowerbound.textContent = "1";
+      upperbound.textContent = "100";
+      
+      // Reset attempts
+      attempts = 0;
+      
+      // Generate a new random number for the next round
+      targetNumber = generateRandomNumber();
+      console.log("New answer: " + targetNumber);
+      
+      // Clear the guess field
+      guessField.value = "";
+      guessField.focus();
+      
+      guessSubmit.disabled = false;
+    }
 
     // Guess function
     function checkGuess() {
