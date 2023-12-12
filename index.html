@@ -43,6 +43,14 @@
     //play again button
     playAgainBtn.addEventListener("click", playAgain); 
     
+    // Function to reveal the answer
+    function revealAnswer() {
+      message.textContent = `本次遊戲的答案是 ${targetNumber}。`;
+      message.style.color = "blue";
+      guessSubmit.disabled = true; // Disable the guess button after revealing the answer
+      revealAnswerBtn.disabled = true; // Disable the reveal answer button
+    }
+    
     //PlayAgain Function
     function generateRandomNumber() {
       return Math.floor(Math.random() * 100) + 1;
